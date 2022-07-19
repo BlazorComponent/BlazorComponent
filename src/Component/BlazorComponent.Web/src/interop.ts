@@ -1571,3 +1571,7 @@ export function scrollToTile(contentSelector: string, tilesSelector: string, ind
     content.scrollTo({ top: tile.offsetTop - contentHeight + tile.clientHeight * 2, behavior: "smooth" })
   }
 }
+
+export function ByIdClick(id: string) {
+  document.getElementById(id).click()
+}

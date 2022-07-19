@@ -29,7 +29,7 @@
         public static string AddOutsideClickEventListener => $"{Variables.JsInteropFuncNamePrefix}addOutsideClickEventListener";
 
         public static string RemoveOutsideClickEventListener => $"{Variables.JsInteropFuncNamePrefix}removeOutsideClickEventListener";
-        
+
         public static string AddWheelEventListener => $"{Variables.JsInteropFuncNamePrefix}addWheelEventListener";
 
         public static string RemoveWheelEventListener => $"{Variables.JsInteropFuncNamePrefix}removeWheelEventListener";
@@ -169,6 +169,8 @@
         public static string GetListIndexWhereAttributeExists => $"{Variables.JsInteropFuncNamePrefix}getListIndexWhereAttributeExists";
 
         public static string ScrollToTile => $"{Variables.JsInteropFuncNamePrefix}scrollToTile";
+
+        public static string ByIdClick => $"{Variables.JsInteropFuncNamePrefix}byIdClick";
 
         #region Draggable Modal
 
