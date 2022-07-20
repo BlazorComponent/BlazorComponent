@@ -18,6 +18,9 @@ namespace BlazorComponent
         public RenderFragment ChildContent { get; set; }
 
         [Parameter]
+        public GroupType? TargetGroup { get; set; }
+
+        [Parameter]
         public bool Mandatory { get; set; }
 
         [Parameter]
@@ -31,6 +34,7 @@ namespace BlazorComponent
             {
                 _values.Clear();
                 _values.Add(value);
+                SetValue(value);
             }
         }
 
@@ -47,11 +51,21 @@ namespace BlazorComponent
         [Parameter]
         public EventCallback<List<StringNumber>> ValuesChanged { get; set; }
 
-        public GroupType GroupType { get; }
+        public GroupType GroupType { get; private set; }
 
         public List<IGroupable> Items { get; } = new();
 
         public List<StringNumber> AllValues => Items.Select(item => item.Value).ToList();
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (TargetGroup.HasValue)
+            {
+                GroupType = TargetGroup.Value;
+            }
+        }
 
         public virtual void Register(IGroupable item)
         {

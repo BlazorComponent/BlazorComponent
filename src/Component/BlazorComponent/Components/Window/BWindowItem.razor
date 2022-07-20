@@ -14,7 +14,7 @@
                                style="@CssProvider.GetStyle()"
                                id="@Id"
                                ReferenceCaptureAction="_ => Ref = _">
-            @ChildContent
+            @RenderPart(typeof(BWindowItemDefaultSlot<>))
         </ShowTransitionElement>
     </Transition>
 }

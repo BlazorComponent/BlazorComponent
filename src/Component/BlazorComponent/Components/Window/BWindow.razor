@@ -2,48 +2,54 @@
 @inherits BItemGroup
 
 <BCascadingValue Value="this" IsFixed>
-    <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id" @ref="Ref">
-        <div class="@CssProvider.GetClass("container")" style="@CssProvider.GetStyle("container")">
-            @ChildContent
+    <CascadingValue Value="Value?.ToString()" Name="WindowValue">
+        <CascadingValue Value="IsDark" Name="IsDark">
+            <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id" @ref="Ref">
+                <div class="@CssProvider.GetClass("container")" style="@CssProvider.GetStyle("container")">
+                    @ChildContent
 
-            @if (ArrowsVisible)
-            {
-                if (HasPrev)
-                {
-                    <div class="@CssProvider.GetClass("prev")">
-                        @if (PrevContent != null)
+                    @if (ArrowsVisible)
+                    {
+                        if (HasPrev)
                         {
-                            @PrevContent(Prev)
+                            <div class="@CssProvider.GetClass("prev")">
+                                @if (PrevContent != null)
+                                {
+                                    @PrevContent(Prev)
+                                }
+                                else
+                                {
+                                    <BButton Icon @onclick="Prev" @attributes="GetAttributes(typeof(BButton))">
+                                        <BIcon @attributes="GetAttributes(typeof(BIcon))">
+                                            @PrevIcon
+                                        </BIcon>
+                                    </BButton>
+                                }
+                            </div>
                         }
-                        else
-                        {
-                            <BButton Icon @onclick="Prev" @attributes="GetAttributes(typeof(BButton))">
-                                <BIcon @attributes="GetAttributes(typeof(BIcon))">
-                                    @PrevIcon
-                                </BIcon>
-                            </BButton>
-                        }
-                    </div>
-                }
 
-                if (HasNext)
-                {
-                    <div class="@CssProvider.GetClass("next")">
-                        @if (NextContent != null)
+                        if (HasNext)
                         {
-                            @NextContent(Next)
+                            <div class="@CssProvider.GetClass("next")">
+                                @if (NextContent != null)
+                                {
+                                    @NextContent(Next)
+                                }
+                                else
+                                {
+                                    <BButton Icon @onclick="Next" @attributes="GetAttributes(typeof(BButton))">
+                                        <BIcon @attributes="GetAttributes(typeof(BIcon))">
+                                            @NextIcon
+                                        </BIcon>
+                                    </BButton>
+                                }
+                            </div>
                         }
-                        else
-                        {
-                            <BButton Icon @onclick="Next" @attributes="GetAttributes(typeof(BButton))">
-                                <BIcon @attributes="GetAttributes(typeof(BIcon))">
-                                    @NextIcon
-                                </BIcon>
-                            </BButton>
-                        }
-                    </div>
-                }
-            }
-        </div>
-    </div>
+                    }
+                </div>
+                @RenderPart(typeof(BCarouselDelimiters<>))
+                @RenderPart(typeof(BCarouselProgress<>))
+            </div>
+        </CascadingValue>
+    </CascadingValue>
 </BCascadingValue>

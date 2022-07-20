@@ -38,7 +38,7 @@ namespace BlazorComponent
 
         protected bool IsReverse { get; set; }
 
-        public bool ArrowsVisible => ShowArrowsOnHover || ShowArrows;
+        public virtual bool ArrowsVisible => ShowArrowsOnHover || ShowArrows;
 
         public int TransitionCount { get; set; }
 
@@ -94,16 +94,19 @@ namespace BlazorComponent
             var nextIndex = GetNextIndex(InternalIndex);
             var nextItem = Items[nextIndex];
 
-            if (ValueChanged.HasDelegate)
+            InvokeAsync(() =>
             {
-                ValueChanged.InvokeAsync(nextItem.Value);
-            }
-            else
-            {
-                Value = nextItem.Value;
-                InternalIndex = nextIndex;
-                StateHasChanged();
-            }
+                if (ValueChanged.HasDelegate)
+                {
+                    ValueChanged.InvokeAsync(nextItem.Value);
+                }
+                else
+                {
+                    Value = nextItem.Value;
+                    InternalIndex = nextIndex;
+                    StateHasChanged();
+                }
+            });
         }
 
         protected void Prev()

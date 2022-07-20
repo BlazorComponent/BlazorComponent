@@ -212,6 +212,12 @@ namespace BlazorComponent
             return GetPartContent(key, component);
         }
 
+        public RenderFragment GetPartContent(Type keyType, string name, IHasProviderComponent component, Action<AttributesBuilder> builderAction)
+        {
+            var key = new ComponentKey(keyType, name);
+            return GetPartContent(key, component, builderAction);
+        }
+
         public RenderFragment GetPartContent(Type keyType, IHasProviderComponent component, Action<AttributesBuilder> builderAction)
         {
             var key = new ComponentKey(keyType);

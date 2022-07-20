@@ -56,6 +56,15 @@ namespace BlazorComponent
             });
         }
 
+        protected RenderFragment RenderPart(Type keyType, string name, object arg0, [CallerArgumentExpression("arg0")] string arg0Name = null)
+        {
+            return AbstractProvider.GetPartContent(keyType, name, Component, builder =>
+            {
+                builder
+                    .Add(arg0Name, arg0);
+            });
+        }
+
         protected RenderFragment RenderPart(Type keyType, object arg0, [CallerArgumentExpression("arg0")] string arg0Name = null)
         {
             return AbstractProvider.GetPartContent(keyType, Component, builder =>

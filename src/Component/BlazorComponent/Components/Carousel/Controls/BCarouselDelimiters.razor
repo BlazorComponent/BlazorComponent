@@ -1,0 +1,26 @@
+﻿@namespace BlazorComponent
+@typeparam TCarousel
+@inherits ComponentPartBase<TCarousel>
+
+@if (!HideDelimiters)
+{
+    <div class="@CssProvider.GetClass("controls")"
+         style="@CssProvider.GetStyle("controls")">
+
+        <BItemGroup @attributes="@GetAttributes(typeof(BItemGroup))"
+                    Value="InternalValue"
+                    ValueChanged="InternalValueChanged"
+                    Mandatory="Mandatory"
+                    TargetGroup="GroupType.ButtonGroup">
+            @foreach (var item in Items)
+            {
+                <BButton @attributes="@GetAttributes(typeof(BButton), "controls-item")" Value="@item.Value">
+                    <BIcon @attributes="@GetAttributes(typeof(BIcon), "controls-item")">
+                        @Icon
+                    </BIcon>
+                </BButton>
+            }
+        </BItemGroup>
+
+    </div>
+}

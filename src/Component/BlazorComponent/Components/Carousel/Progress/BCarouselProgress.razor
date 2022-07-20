@@ -1,0 +1,11 @@
+﻿@namespace BlazorComponent
+@typeparam TCarousel
+@inherits ComponentPartBase<TCarousel>
+
+@if (Progress || !string.IsNullOrWhiteSpace(ProgressColor))
+{
+    <BProgressLinear @attributes="@GetAttributes(typeof(BProgressLinear))"
+                     Color="@ProgressColor"
+                     Value="@Value">
+    </BProgressLinear>
+}

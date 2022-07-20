@@ -1,0 +1,7 @@
+﻿@namespace BlazorComponent
+@typeparam TWindowItem
+@inherits BWindowItemDefaultSlot<TWindowItem>
+
+<BResponsive @attributes="@GetAttributes(typeof(BResponsive))">
+    @ChildContent
+</BResponsive>

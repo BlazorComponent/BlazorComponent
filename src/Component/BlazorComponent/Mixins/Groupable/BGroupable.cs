@@ -103,6 +103,20 @@
             }
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (_firstRenderAfterBooting)
+            {
+                await Task.Delay(16);
+                _firstRenderAfterBooting = false;
+
+                InternalIsActive = true;
+                StateHasChanged();
+            }
+        }
+
         protected virtual async Task ToggleAsync()
         {
             if (!Matched) return;
