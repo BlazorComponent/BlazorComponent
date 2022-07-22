@@ -5,6 +5,9 @@ namespace BlazorComponent
     public partial class BCascaderList<TItem, TValue>
     {
         [Parameter]
+        public bool ChangeOnSelect { get; set; }
+
+        [Parameter]
         public IList<TItem> Items { get; set; }
 
         [Parameter]
@@ -17,7 +20,7 @@ namespace BlazorComponent
         public Func<TItem, Task> LoadChildren { get; set; }
 
         [Parameter]
-        public EventCallback<TItem> OnSelect { get; set; }
+        public EventCallback<(TItem item, bool closeOnSelect)> OnSelect { get; set; }
 
         protected virtual string Icon { get; }
 
@@ -26,6 +29,8 @@ namespace BlazorComponent
         protected IList<TItem> Children { get; set; }
 
         protected TItem SelectedItem { get; set; }
+
+        private bool IsLast => Children == null || Children.Count == 0;
 
         protected async Task SelectItemAsync(TItem item)
         {
@@ -41,9 +46,16 @@ namespace BlazorComponent
                 Children = ItemChildren(item);
             }
 
-            if ((Children == null || Children.Count == 0) && OnSelect.HasDelegate)
+            if (OnSelect.HasDelegate)
             {
-                await OnSelect.InvokeAsync(item);
+                if (ChangeOnSelect)
+                {
+                    await OnSelect.InvokeAsync((item, IsLast));
+                }
+                else if (IsLast)
+                {
+                    await OnSelect.InvokeAsync((item, true));
+                }
             }
         }
     }
