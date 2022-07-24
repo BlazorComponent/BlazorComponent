@@ -152,6 +152,9 @@
       "Third": "3rd",
       "Fourth": "4th",
       "Fiveth": "5th"
+    },
+    "mobileCascader": {
+      "pleaseSelect": "Please select"
     }
   }
 }
